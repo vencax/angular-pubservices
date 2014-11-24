@@ -4,8 +4,8 @@
   "version": "0.1.2",
   "private": false,
   "author": {
-    "name": "John Doe",
-    "company": "ACME, Inc."
+    "name": "Vaclav Klecanda",
+    "email": "vencax77@gmail.com"
   },
   "scripts": {
     "preinstall": "lineman build",
