@@ -8,7 +8,6 @@
     "email": "vencax77@gmail.com"
   },
   "scripts": {
-    "preinstall": "lineman build",
     "start": "lineman run",
     "test": "lineman spec-ci"
   },
