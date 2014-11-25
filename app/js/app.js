@@ -1,5 +1,5 @@
 var app = angular.module("app", [
-  "ngResource", "ngRoute", "ngTable", "ngCookies", "ui.bootstrap", "ngStorage",
+  "ngResource", "ngRoute", "ui.bootstrap", "ngStorage",
   "pascalprecht.translate"
 ]);
 
