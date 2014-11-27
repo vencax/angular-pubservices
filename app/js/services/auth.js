@@ -12,18 +12,18 @@ var _adaptUser = function(user) {
 
 app.factory('AuthService', function($http, $window, $rootScope, $localStorage, Conf) {
 
-  var _setUser = function(user) {
+  var _setUser = function(user, token) {
     $localStorage.currentUser = _adaptUser(user);
-    $localStorage.token = user.token;
+    $localStorage.token = token;
   };
 
   // these routes map to stubbed API endpoints in config/server.js
   return {
     login: function(credentials, done) {
       $http.post(Conf.host + '/auth/login', credentials)
-        .success(function(user){
-          _setUser(user);
-          return done(null, user);
+        .success(function(uinfo){
+          _setUser(uinfo.user, uinfo.token);
+          return done(null, uinfo.user);
         })
         .error(function(err){
           return done(err);
