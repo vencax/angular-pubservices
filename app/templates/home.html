@@ -45,8 +45,8 @@
       </thead>
       <tbody>
         <tr ng-repeat="t in tickets">
-          <td>#{{ t.id }}</td>
-          <td>{{ t.remains }}</td>
+          <td>#{{ t.transid }}</td>
+          <td>{{ t.remains }} min</td>
           <td>{{ t.expires | nicedate }}</td>
           <td>{{ t.desc }}</td>
         </tr>
