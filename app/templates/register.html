@@ -60,6 +60,14 @@
         </div>
       </div>
 
+      <div data-ng-show="error" class="alert alert-danger" role="alert">
+        {{ error | translate }}
+      </div>
+
+      <div data-ng-show="message" class="alert alert-success" role="alert">
+        {{ message | translate }}
+      </div>
+
       <div class="form-group">
         <button type="submit" class="btn btn-lg btn-primary">
           <span class="glyphicon glyphicon-pencil"></span> {{'REGISTER' | translate}}
