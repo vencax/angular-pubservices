@@ -65,6 +65,7 @@ angular.module("app")
     REGISTER_PWD_REPEAT_VALID: 'Zadej heslo znovu, pro kontrolu',
     REGISTER_PWD_REPEAT_NOTMATCH: 'Zadaná hesla nesouhlasí',
     REGISTER_CHANGE_PWD_H1: 'Změna hesla',
+    SUCCESSFULY_REGISTERED: 'Výborně, právě ti byl odeslán mail s dalšími instrukcemi',
     RIGHTSREMOVED: 'všechna práva vyhlazena',
     MOCKTRANSFER_H1: 'Zkušební bankovní převod',
     COMMON_REQ: 'Toto je povinné pole',
