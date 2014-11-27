@@ -19,6 +19,7 @@ _gandalf =
   role: 0
   uname: 'gandalf'
   email: 'g@nda.lf'
+  passwd: 'he'
   token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Mywi"
 
 
