@@ -1,6 +1,6 @@
 angular.module("app")
 
-.controller('LoginController', function($scope, $rootScope, $location, $translate, AuthService, TicketSrvc) {
+.controller('LoginController', function($scope, $rootScope, $location, AuthService, TicketSrvc) {
 
   $scope.credentials = { username: "", password: "" };
 
@@ -8,13 +8,13 @@ angular.module("app")
     $location.path("/");
     $rootScope.loggedUser = user;
     TicketSrvc.credit(user).success(function(credit){
-      user.credit = credit;
+      user.credit = parseInt(credit, 10);
     });
   };
 
   var _authServiceHandler = function(err, user) {
     if (err) {
-      $scope.error = $translate.instant(err);
+      $scope.error = err;
     } else {
       _onLoggedIn(user);
     }
@@ -34,16 +34,17 @@ angular.module("app")
 
 })
 
-.controller('SocialLoginCallbackCtrl', function($scope, $rootScope, $location, AuthService) {
+.controller('SocialLoginCallbackCtrl', function($scope, $rootScope, $location, AuthService, TicketSrvc) {
 
-  AuthService.getUserAfterSocialLogin()
-  .success(function(user) {
+  AuthService.getUserAfterSocialLogin(function(err, user) {
+    if(err) {
+      return alert(err);
+    }
     $location.path("/");
     $rootScope.loggedUser = user;
-    user.credit = 117;
-  })
-  .error(function(err) {
-    alert(err);
+    TicketSrvc.credit(user).success(function(credit){
+      user.credit = parseInt(credit, 10);
+    });
   });
 
 });

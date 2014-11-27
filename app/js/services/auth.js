@@ -30,8 +30,6 @@ app.factory('AuthService', function($http, $window, $rootScope, $localStorage, C
         });
     },
 
-    setUser: _setUser,
-
     logout: function(done) {
       delete $localStorage.currentUser;
       delete $localStorage.token;
@@ -42,8 +40,15 @@ app.factory('AuthService', function($http, $window, $rootScope, $localStorage, C
       $window.location.href = Conf.host + '/auth/' + provider + '/';
     },
 
-    getUserAfterSocialLogin: function() {
-      return $http.get(Conf.host + '/auth/userinfo');
+    getUserAfterSocialLogin: function(cb) {
+      $http.get(Conf.host + '/auth/userinfo')
+      .success(function(uinfo) {
+        _setUser(uinfo.user, uinfo.token);
+        return cb(null, uinfo.user);
+      })
+      .error(function(err) {
+        cb(err);
+      });
     },
 
     getCurrentUser: function() {
