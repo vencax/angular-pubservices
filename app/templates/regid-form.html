@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <h3 class="modal-title">{{'INPUT_REGID' | translate}}</h3>
+</div>
+
+<div class="modal-body">
+  <form name="frm">
+
+    <div class="form-group has-feedback"
+      ng-class="{
+        'has-error': frm.name.$invalid && frm.name.$dirty,
+        'has-success': frm.name.$valid && frm.name.$dirty}
+        ">
+      <label class="control-label" for="name">{{'REGID' | translate}}</label>
+      <input name="name" type="text" class="form-control" ng-model="item.name"
+        required ng-minlength=3 placeholder="{{'REGID' | translate}}">
+      <span class="glyphicon form-control-feedback"
+        ng-class="{'glyphicon-ok': frm.name.$valid, 'glyphicon-remove': frm.name.$invalid}"></span>
+      <div class="error-container" ng-show="frm.name.$invalid && frm.name.$dirty">
+        <small class="text-danger" ng-show="frm.name.$error.required">{{'INPUT_REGID' | translate}}</small>
+        <small class="text-danger" ng-show="frm.name.$error.minlength">{{'REGID_ERR_MINLEN' | translate}}</small>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-disabled="frm.$invalid" ng-click="ok()">OK</button>
+  <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+</div>

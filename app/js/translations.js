@@ -76,7 +76,11 @@ angular.module("app")
     TERMS: 'podmínky',
     USER_NOT_FOUND: 'Uživatel s daným UID nenalezen',
     WRONG_CREDENTIALS: 'špatné uživatelské jmého nebo heslo',
-    NOT_ENOUGH_MONEY: 'Nedostatečný kredit'
+    NOT_ENOUGH_MONEY: 'Nedostatečný kredit',
+    INPUT_REGID: 'Zadej registračku parkovaného auta',
+    REGID_ERR_MINLEN: 'Registračka je spatně',
+    REGID: 'Registračka',
+    CHOOSE_PRODUCT: 'Tak co to bude?'
   });
 
   $translateProvider.preferredLanguage('cs');
