@@ -8,8 +8,8 @@ angular.module("app")
     $scope.data = data;
   });
 
-  function doBuy(product) {
-    TicketSrvc.buy(product).success(function(data) {
+  function doBuy(product, uid) {
+    TicketSrvc.buy(product, uid).success(function(data) {
       $rootScope.loggedUser.credit -= product.amount;
       $location.path('/');
     }).error(function(err){
@@ -19,7 +19,7 @@ angular.module("app")
 
   $scope.buy = function(ticket) {
     if(ticket.cat !== 2) {
-      doBuy(ticket);
+      doBuy(ticket, $rootScope.loggedUser.id);
     } else {
       var modalInstance = $modal.open({
         templateUrl: 'regid-form.html',
@@ -27,8 +27,7 @@ angular.module("app")
       });
 
       modalInstance.result.then(function (regid) {
-        ticket.regid = regid;
-        doBuy(ticket);
+        doBuy(ticket, regid);
       });
     }
   };
