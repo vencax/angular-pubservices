@@ -11,7 +11,7 @@
         'has-success': frm.name.$valid && frm.name.$dirty}
         ">
       <label class="control-label" for="name">{{'REGID' | translate}}</label>
-      <input name="name" type="text" class="form-control" ng-model="item.name"
+      <input name="name" type="text" class="form-control" ng-model="item"
         required ng-minlength=3 placeholder="{{'REGID' | translate}}">
       <span class="glyphicon form-control-feedback"
         ng-class="{'glyphicon-ok': frm.name.$valid, 'glyphicon-remove': frm.name.$invalid}"></span>
