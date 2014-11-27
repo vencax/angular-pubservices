@@ -80,7 +80,8 @@ angular.module("app")
     INPUT_REGID: 'Zadej registračku parkovaného auta',
     REGID_ERR_MINLEN: 'Registračka je spatně',
     REGID: 'Registračka',
-    CHOOSE_PRODUCT: 'Tak co to bude?'
+    CHOOSE_PRODUCT: 'Tak co to bude?',
+    CREDENTIALS_NOT_VALID: 'Nesprávné přihlašovací údaje'
   });
 
   $translateProvider.preferredLanguage('cs');
