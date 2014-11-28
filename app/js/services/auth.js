@@ -1,20 +1,13 @@
 
-var app = angular.module("app");
+angular.module("app")
 
+.factory('AuthService', function($http, $window, $rootScope, SessionService, Conf) {
 
-var _adaptUser = function(user) {
-  if (! ('name' in user)) {
-    user.name = user.first_name + ' ' + user.last_name || user.username;
-  }
-  return user;
-};
-
-
-app.factory('AuthService', function($http, $window, $rootScope, $localStorage, Conf) {
-
-  var _setUser = function(user, token) {
-    $localStorage.currentUser = _adaptUser(user);
-    $localStorage.token = token;
+  var _adaptUser = function(user) {
+    if (! ('name' in user)) {
+      user.name = user.first_name + ' ' + user.last_name || user.username;
+    }
+    return user;
   };
 
   // these routes map to stubbed API endpoints in config/server.js
@@ -22,7 +15,7 @@ app.factory('AuthService', function($http, $window, $rootScope, $localStorage, C
     login: function(credentials, done) {
       $http.post(Conf.host + '/auth/login', credentials)
         .success(function(uinfo){
-          _setUser(uinfo.user, uinfo.token);
+          SessionService.setCurrentUser(uinfo.user, uinfo.token);
           return done(null, uinfo.user);
         })
         .error(function(err){
@@ -31,8 +24,7 @@ app.factory('AuthService', function($http, $window, $rootScope, $localStorage, C
     },
 
     logout: function(done) {
-      delete $localStorage.currentUser;
-      delete $localStorage.token;
+      SessionService.logout();
       return done();
     },
 
@@ -43,20 +35,12 @@ app.factory('AuthService', function($http, $window, $rootScope, $localStorage, C
     getUserAfterSocialLogin: function(cb) {
       $http.get(Conf.host + '/auth/userinfo')
       .success(function(uinfo) {
-        _setUser(uinfo.user, uinfo.token);
+        SessionService.setCurrentUser(uinfo.user, uinfo.token);
         return cb(null, uinfo.user);
       })
       .error(function(err) {
         cb(err);
       });
-    },
-
-    getCurrentUser: function() {
-      return $localStorage.currentUser || null;
-    },
-
-    isLoggedIn: function() {
-      return $localStorage.hasOwnProperty('currentUser');
     },
 
     register: function(user, cb) {
@@ -89,4 +73,29 @@ app.factory('AuthService', function($http, $window, $rootScope, $localStorage, C
         });
     }
   };
+})
+
+.factory('SessionService', function($localStorage, $location) {
+
+  var _cuKey = $location.host() + $location.port() + 'currentUser';
+
+  return {
+    setCurrentUser: function(currentUser, token) {
+      currentUser.token = token;
+      $localStorage[_cuKey] = currentUser;
+    },
+
+    getCurrentUser: function() {
+      return $localStorage[_cuKey] || null;
+    },
+
+    isLoggedIn: function() {
+      return $localStorage.hasOwnProperty(_cuKey);
+    },
+
+    logout: function() {
+      delete $localStorage[_cuKey];
+    }
+  };
+
 });

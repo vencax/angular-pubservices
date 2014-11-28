@@ -20,7 +20,8 @@ _gandalf =
   uname: 'gandalf'
   email: 'g@nda.lf'
   passwd: 'he'
-  token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Mywi"
+
+_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Mywi"
 
 
 _products =
@@ -72,7 +73,7 @@ module.exports =
 
     app.post "/auth/login", (req, res) ->
       if req.body.username == _gandalf.uname and req.body.password == _gandalf.passwd
-        res.json(_gandalf)
+        res.json({user: _gandalf, token: _token})
       else
         res.status(404).send('WRONG_CREDENTIALS')
 

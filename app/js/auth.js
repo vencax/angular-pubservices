@@ -3,10 +3,13 @@ var app = angular.module("app");
 
 
 // add authentication
-app.run(function($rootScope, $location, AuthService) {
+app.run(function($rootScope, $location, SessionService) {
 
   // enumerate routes that don't need authentication
-  var routesNoRequiringAuth = ['/', '/login', '/register', '/changepwd', '/requestpwd', '/terms', '/_socialcallback'];
+  var routesNoRequiringAuth = [
+    '/', '/login', '/register', '/changepwd',
+    '/requestpwd', '/terms', '/_socialcallback'
+  ];
 
   // check if current location matches route
   routeClean = function(route) {
@@ -17,7 +20,7 @@ app.run(function($rootScope, $location, AuthService) {
   $rootScope.$on("$routeChangeStart", function(event, next, current) {
 
     // if route requires auth and user is not logged in
-    if ((! routeClean($location.url())) && (! AuthService.isLoggedIn())) {
+    if ((! routeClean($location.url())) && (! SessionService.isLoggedIn())) {
       // redirect back to login
       $location.path("/login");
     }
@@ -29,20 +32,19 @@ app.run(function($rootScope, $location, AuthService) {
 // inject authorization header into outgoing reqs
 app.config(function($httpProvider) {
 
-  $httpProvider.interceptors.push(function($q, $location, $localStorage, $rootScope) {
+  $httpProvider.interceptors.push(function($q, $location, $rootScope, SessionService) {
     return {
       request: function(config) {
         config.headers = config.headers || {};
-        if ($localStorage.token) {
-          config.headers.Authorization = 'Bearer ' + $localStorage.token;
+        if (SessionService.getCurrentUser()) {
+          config.headers.Authorization = 'Bearer ' + SessionService.getCurrentUser().token;
         }
         return config;
       },
 
       responseError: function(rejection) {
         if (rejection.status === 401) {
-          $rootScope.loggedUser = null;
-          $location.url('/login');
+          $rootScope.logout();
         }
         return $q.reject(rejection);
       }

@@ -3,16 +3,9 @@ var app = angular.module("app", [
   "pascalprecht.translate"
 ]);
 
-app.run(function($rootScope, $location, AuthService, TicketSrvc) {
+app.run(function($rootScope, $location, SessionService, AuthService, TicketSrvc) {
 
   moment.locale(navigator.language);
-
-  if(AuthService.getCurrentUser()) {
-    $rootScope.loggedUser = AuthService.getCurrentUser();
-    TicketSrvc.credit($rootScope.loggedUser).success(function(credit){
-      $rootScope.loggedUser.credit = parseInt(credit, 10);
-    });
-  }
 
   $rootScope.logout = function() {
     return AuthService.logout(function() {
@@ -20,6 +13,17 @@ app.run(function($rootScope, $location, AuthService, TicketSrvc) {
       return $location.path("/login");
     });
   };
+
+  $rootScope.onLoggedIn = function(user) {
+    $rootScope.loggedUser = user;
+    TicketSrvc.credit(user).success(function(credit){
+      user.credit = parseInt(credit, 10);
+    });
+  };
+
+  if(SessionService.getCurrentUser()) {
+    $rootScope.onLoggedIn(SessionService.getCurrentUser());
+  }
 
   // adds some basic utilities to the $rootScope for debugging purposes
   $rootScope.log = function(thing) {

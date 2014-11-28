@@ -4,19 +4,12 @@ angular.module("app")
 
   $scope.credentials = { username: "", password: "" };
 
-  var _onLoggedIn = function(user) {
-    $location.path("/");
-    $rootScope.loggedUser = user;
-    TicketSrvc.credit(user).success(function(credit){
-      user.credit = parseInt(credit, 10);
-    });
-  };
-
   var _authServiceHandler = function(err, user) {
     if (err) {
       $scope.error = err;
     } else {
-      _onLoggedIn(user);
+      $rootScope.onLoggedIn(user);
+      $location.path("/");
     }
   };
 
@@ -40,11 +33,8 @@ angular.module("app")
     if(err) {
       return alert(err);
     }
+    $rootScope.onLoggedIn(user);
     $location.path("/");
-    $rootScope.loggedUser = user;
-    TicketSrvc.credit(user).success(function(credit){
-      user.credit = parseInt(credit, 10);
-    });
   });
 
 });

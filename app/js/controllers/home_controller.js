@@ -2,7 +2,7 @@
 
 angular.module("app")
 
-.controller('HomeCtrl', function($scope, $rootScope, $timeout, TicketSrvc, AuthService) {
+.controller('HomeCtrl', function($scope, $rootScope, $timeout, TicketSrvc, SessionService) {
 
   $scope.tickets = [];
 
@@ -15,7 +15,7 @@ angular.module("app")
     $timeout($scope.updateRemains, 60000);
   };
 
-  if(AuthService.isLoggedIn()) {
+  if(SessionService.isLoggedIn()) {
     TicketSrvc.validtickets().success(function(tickets) {
       $scope.tickets = tickets;
       $scope.tickets.forEach(function(t) {
