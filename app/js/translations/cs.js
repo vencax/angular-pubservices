@@ -1,37 +1,6 @@
 angular.module("app")
 
-.config(['$translateProvider', function ($translateProvider) {
-  $translateProvider.translations('en', {
-    TITLE: 'Hello',
-    LOADING: 'This is a paragraph',
-    HOME: 'Hom',
-    BUY: 'Buy',
-    REMAINING: 'Remaining',
-    EXPIRES: 'Expires',
-    DESC: 'Description',
-    SETTINGS: 'Settings',
-    VALID_TICKETS: 'Valid tickets',
-    NO_VALID_TICKETS: 'You have no valid ticket!',
-    HISTORY: 'History',
-    HISTORY_TITLE: 'Credit history',
-    HISTORY_NOTYET: 'You have no history yet',
-    IFYOUCANNOTLOGIN: 'If you cannot login, please contact us',
-    FORGOTTEN_PWD: 'Have you forgotten your password',
-    INPUTPWD: 'Please input your password',
-    INPUTUSERNAME: 'Please input your username',
-    LOGIN: 'Log in',
-    LOGOUT: 'Logout',
-    REGISTER_H1: 'Please fill in the form',
-    REGISTER_NAME_REQ: 'Please input your name',
-    REGISTER_EMAIL_REQ: 'Please input your email',
-    REGISTER_EMAIL_INVALID: 'Email is invalid',
-    REGISTER_EMAIL_ALREADYREG: 'Email is already registered',
-    REGISTER_PWD_REQ: 'Please input your password',
-    REGISTER_PWD_REPEAT_VALID: 'Please input your password once again for sure',
-    REGISTER_PWD_REPEAT_NOTMATCH: 'Both passwords doesnot match',
-    REGISTER_CHANGE_PWD_H1: 'Change your password',
-    RIGHTSREMOVED: 'all rights removed'
-  });
+.config(function ($translateProvider) {
 
   $translateProvider.translations('cs', {
     TITLE: 'Hallo',
@@ -65,7 +34,6 @@ angular.module("app")
     REGISTER_PWD_REPEAT_VALID: 'Zadej heslo znovu, pro kontrolu',
     REGISTER_PWD_REPEAT_NOTMATCH: 'Zadaná hesla nesouhlasí',
     REGISTER_CHANGE_PWD_H1: 'Změna hesla',
-    SUCCESSFULY_REGISTERED: 'Výborně, právě ti byl odeslán mail s dalšími instrukcemi',
     RIGHTSREMOVED: 'všechna práva vyhlazena',
     MOCKTRANSFER_H1: 'Zkušební bankovní převod',
     COMMON_REQ: 'Toto je povinné pole',
@@ -82,9 +50,9 @@ angular.module("app")
     REGID_ERR_MINLEN: 'Registračka je spatně',
     REGID: 'Registračka',
     CHOOSE_PRODUCT: 'Tak co to bude?',
-    CREDENTIALS_NOT_VALID: 'Nesprávné přihlašovací údaje'
+    CREDENTIALS_NOT_VALID: 'Nesprávné přihlašovací údaje',
+    VERIFYCATION_PWD_MAIL_SENT: 'Výborně, právě ti byl odeslán mail s dalšími instrukcemi',
+    FORGOTTEN_PWD_MAIL_SENT: 'Ok, email s dalšími instrukcemi poslán'
   });
 
-  $translateProvider.preferredLanguage('cs');
-  moment.locale('cs');
-}]);
+});
