@@ -36,13 +36,14 @@ angular.module("app")
   };
 })
 
-.controller('ChangepwdCtrl', function($scope, AuthService) {
+.controller('ChangepwdCtrl', function($scope, $location, AuthService) {
   $scope.pwd = "";
   $scope.pwdVerif = "";
   $scope.error = $scope.message = null;
 
   $scope.submit = function() {
-    AuthService.changePwd($scope.pwd, function(err, message) {
+    var query = $location.url().split('?')[1];
+    AuthService.changePwd($scope.pwd, query, function(err, message) {
       _commonServiceHandler(err, message, $scope);
     });
   };

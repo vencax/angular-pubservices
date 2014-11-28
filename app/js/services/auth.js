@@ -46,8 +46,8 @@ angular.module("app")
         });
     },
 
-    changePwd: function(pwd, cb) {
-      $http.post(Conf.host + '/auth/setpasswd', {'passwd': pwd})
+    changePwd: function(pwd, query, cb) {
+      $http.post(Conf.host + '/auth/setpasswd?' + query, {'passwd': pwd})
         .success(function(data) {
           return cb(null, data);
         })

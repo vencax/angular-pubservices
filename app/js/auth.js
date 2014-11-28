@@ -13,7 +13,12 @@ app.run(function($rootScope, $location, SessionService) {
 
   // check if current location matches route
   routeClean = function(route) {
-    return routesNoRequiringAuth.indexOf(route) >= 0;
+    for(var i=0; i<routesNoRequiringAuth.length; i++) {
+      if(route.indexOf(routesNoRequiringAuth[i]) >= 0) {
+        return true;
+      }
+    }
+    return false;
   };
 
 
