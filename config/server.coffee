@@ -14,8 +14,7 @@ defining a spec based on the needs of the client code that emerge.
 
 _gandalf =
   id: 111
-  first_name: 'Gandalf'
-  last_name: 'The Gray'
+  displayName: 'Gandalf The Gray'
   role: 0
   uname: 'gandalf'
   email: 'g@nda.lf'

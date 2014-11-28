@@ -3,13 +3,6 @@ angular.module("app")
 
 .factory('AuthService', function($http, $window, $rootScope, SessionService, Conf) {
 
-  var _adaptUser = function(user) {
-    if (! ('name' in user)) {
-      user.name = user.first_name + ' ' + user.last_name || user.username;
-    }
-    return user;
-  };
-
   // these routes map to stubbed API endpoints in config/server.js
   return {
     login: function(credentials, done) {
